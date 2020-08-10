@@ -5,8 +5,6 @@ import {Timer} from './Timer'
 export const Board = () => {
 
 
-
-
   return (
     <main>
     <Cards />
