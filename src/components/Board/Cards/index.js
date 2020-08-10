@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
+import api from "api"
 
 export const Cards = () => {
+
+
+
+useEffect(() => {
+  api.index()
+})
+
+
+
+
 return (
   <p>cards</p>
 )
