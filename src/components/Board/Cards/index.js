@@ -1,14 +1,17 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import api from "api"
 
 export const Cards = () => {
+  const [cards, setCards] = useState([])
 
 
 
 useEffect(() => {
-  api.index()
-})
+  (async () => {
+    setCards(await api.index(4))
+  })()
+}, [])
 
 
 
