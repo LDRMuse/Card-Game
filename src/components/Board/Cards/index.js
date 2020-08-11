@@ -22,10 +22,23 @@ export const Cards = ({ handler }) => {
         cardCopy.id = `${cardCopy.code}-${i}`
         return cardCopy
       })
-
       setCards(cardsWithIDs)
     })()
   }, [])
+
+
+  useEffect(() => {
+    setCards((prevCards) =>
+      prevCards.map((card) => {
+        if (card.id === (flippedCards[0].id || card.id === flippedCards[1]?.id)) {
+          card.flipped = true
+        }
+        return card
+      })
+      )
+  }, [flippedCards])
+
+
 
   const flipHandler = ({ target: { dataset } }) => {
     // if it's true that this is no length on flipped cards....
@@ -38,17 +51,13 @@ export const Cards = ({ handler }) => {
       setFlippedCards((flippedCards) =>
         flippedCards.concat({ id: dataset.id, code: dataset.code })
       )
-
-
     }
-
-
-
   }
 
   const renderCards = () => {
-    return cards.map(({ code, id, image, value, suit }, i) => (
+    return cards.map(({ code, id, image, value, suit, flipped }, i) => (
       <Card
+        flipped={flipped}
         code={code}
         id={id}
         image={image}
