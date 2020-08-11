@@ -31,6 +31,8 @@ export const Cards = ({ handler }) => {
   const renderCards = () => {
     return cards.map(({ image, value, suit }, i) => (
       <Card
+      code={code}
+      id={id}
         image={image}
         value={value}
         suit={suit} key={i}
