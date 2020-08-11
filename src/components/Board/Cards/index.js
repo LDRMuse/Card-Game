@@ -27,8 +27,23 @@ export const Cards = ({ handler }) => {
     })()
   }, [])
 
-  const flipHandler = ({target: {dataset}}) => {
-    setFlippedCards(flippedCards => flippedCards.concat({id: dataset.id, code: dataset.code}))
+  const flipHandler = ({ target: { dataset } }) => {
+    // if it's true that this is no length on flipped cards....
+    if (!flippedCards.length) {
+      setFlippedCards((flippedCards) =>
+        flippedCards.concat({ id: dataset.id, code: dataset.code })
+      )
+    } else if (flippedCards[0].id != dataset.id) {
+      // we can still add a card as long as the id
+      setFlippedCards((flippedCards) =>
+        flippedCards.concat({ id: dataset.id, code: dataset.code })
+      )
+
+
+    }
+
+
+
   }
 
   const renderCards = () => {
