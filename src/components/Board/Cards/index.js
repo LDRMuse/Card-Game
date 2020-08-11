@@ -27,12 +27,15 @@ export const Cards = ({ handler }) => {
     })()
   }, [])
 
+  const flipHandler = (event) => {
+    console.log(event.target)
+  }
 
   const renderCards = () => {
-    return cards.map(({ image, value, suit }, i) => (
+    return cards.map(({ code, id, image, value, suit }, i) => (
       <Card
-      code={code}
-      id={id}
+        code={code}
+        id={id}
         image={image}
         value={value}
         suit={suit} key={i}
@@ -41,9 +44,6 @@ export const Cards = ({ handler }) => {
     ))
   }
 
-  const flipHandler = (event) => {
-    console.log(event.target)
-  }
 
   return (
     <div className="container">{renderCards()}</div>
