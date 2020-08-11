@@ -27,8 +27,8 @@ export const Cards = ({ handler }) => {
     })()
   }, [])
 
-  const flipHandler = (event) => {
-    console.log(event.target)
+  const flipHandler = ({target: {dataset}}) => {
+    setFlippedCards(flippedCards => flippedCards.concat({id: dataset.id, code: dataset.code}))
   }
 
   const renderCards = () => {
