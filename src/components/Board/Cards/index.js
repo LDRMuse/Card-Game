@@ -18,20 +18,26 @@ export const Cards = ({ handler }) => {
       const { cards } = await api.index(4)
       //duplicate cards
       const dupeCards = cards.concat(Array.from(cards))
-      // assign id using code and index
-      setCards(dupeCards)
+
+      const cardsWithIDs = dupeCards.map((card, i) => {
+        const cardCopy = JSON.parse(JSON.stringify(card))
+        cardCopy.id = `${cardCopy.code}-${i}`
+        return cardCopy
+      })
+
+      setCards(cardsWithIDs)
     })()
   }, [])
 
 
   const renderCards = () => {
     return cards.map(({ image, value, suit }, i) => (
-    <Card
-    image={image}
-    value={value}
-    suit={suit} key={i}
-    flipHandler={flipHandler}
-    />
+      <Card
+        image={image}
+        value={value}
+        suit={suit} key={i}
+        flipHandler={flipHandler}
+      />
     ))
   }
 
