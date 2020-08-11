@@ -17,9 +17,7 @@ export const Cards = ({ handler }) => {
     (async () => {
       const { cards } = await api.index(4)
       //duplicate cards
-      const dupeCards = cards.concat(Array.from(cards))
-
-      const cardsWithIDs = dupeCards.map((card, i) => {
+      const cardsWithIDs = cards.concat(Array.from(cards)).map((card, i) => {
         const cardCopy = JSON.parse(JSON.stringify(card))
         cardCopy.id = `${cardCopy.code}-${i}`
         return cardCopy
