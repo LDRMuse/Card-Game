@@ -13,6 +13,7 @@ export const Card = ({ image, value, suit, flipped, matched, flipHandler, code, 
         alt={`${value} of ${suit}`}
         data-code={code}
         data-id={id} //dataset.id
+        className={matched ? 'matched' : null}
       />
     </button>
   )

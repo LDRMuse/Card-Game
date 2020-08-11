@@ -30,32 +30,48 @@ export const Cards = ({ handler }) => {
   useEffect(() => {
     setCards((prevCards) =>
       prevCards.map((card) => {
-        if (card.id === (flippedCards[0].id || card.id === flippedCards[1]?.id)) {
+        if (card.id === (flippedCards[0]?.id || card.id === flippedCards[1]?.id)) {
           card.flipped = true
         }
         return card
       })
-      )
+    )
+
+
+    if (flippedCards[0]?.code === flippedCards[1]?.code) {
+      cards.map(card => {
+        if (card.id === (flippedCards[0]?.id || card.id === flippedCards[1]?.id)) {
+          card.matched = true
+          return card
+        }
+
+      })
+      // setFlippedCards([])
+    }
   }, [flippedCards])
 
 
 
   const flipHandler = ({ target: { dataset } }) => {
-    // if it's true that this is no length on flipped cards....
     if (!flippedCards.length) {
       setFlippedCards((flippedCards) =>
-        flippedCards.concat({ id: dataset.id, code: dataset.code })
+        flippedCards.concat({
+          id: dataset.id,
+          code: dataset.code
+        })
       )
     } else if (flippedCards[0].id != dataset.id) {
-      // we can still add a card as long as the id
       setFlippedCards((flippedCards) =>
-        flippedCards.concat({ id: dataset.id, code: dataset.code })
+        flippedCards.concat({
+          id: dataset.id,
+          code: dataset.code
+        })
       )
     }
   }
 
   const renderCards = () => {
-    return cards.map(({ code, id, image, value, suit, flipped }, i) => (
+    return cards.map(({ code, id, image, value, suit, flipped, matched }, i) => (
       <Card
         flipped={flipped}
         code={code}
@@ -63,6 +79,7 @@ export const Cards = ({ handler }) => {
         image={image}
         value={value}
         suit={suit} key={i}
+        matched={matched}
         flipHandler={flipHandler}
       />
     ))
