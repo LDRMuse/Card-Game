@@ -39,7 +39,7 @@ export const Cards = ({ handler }) => {
 
 
     if (flippedCards[0]?.code === flippedCards[1]?.code) {
-      cards.map(card => {
+      cards.map((card) => {
         if (card.id === (flippedCards[0]?.id || card.id === flippedCards[1]?.id)) {
           card.matched = true
           return card
@@ -57,14 +57,14 @@ export const Cards = ({ handler }) => {
       setFlippedCards((flippedCards) =>
         flippedCards.concat({
           id: dataset.id,
-          code: dataset.code
+          code: dataset.code,
         })
       )
     } else if (flippedCards[0].id != dataset.id) {
       setFlippedCards((flippedCards) =>
         flippedCards.concat({
           id: dataset.id,
-          code: dataset.code
+          code: dataset.code,
         })
       )
     }
