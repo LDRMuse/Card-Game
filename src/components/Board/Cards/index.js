@@ -15,7 +15,15 @@ export const Cards = ({ handler, cards }) => {
 
   useEffect(() => {
     if (flippedCards.length && flippedCards[0].code === flippedCards[1]?.code) {
-      setMatchedCards((prevMatched) => prevMatched.concat(flippedCards[0].code))
+      setMatchedCards((prevMatched) =>
+      prevMatched.concat(flippedCards[0].code)
+      )
+      setFlippedCards([])
+    }
+    if (flippedCards.length === 2) {
+      setTimeout(() => {
+        setFlippedCards([])
+      }, 2000)
     }
   }, [flippedCards])
 
@@ -41,39 +49,38 @@ export const Cards = ({ handler, cards }) => {
     }
   }
 
-    const renderCards = () => {
-      return cards.map(({ code, id, image, value, suit, flipped, matched }, i) => {
-        // if current card is listed in flippedCards, set it as flipped before it gets rendered
-        if (id === flippedCards[0]?.id || id === flippedCards[1]?.id) {
-          flipped = true
-        }
-
-        if (matchedCards.includes(code)) {
-          matched = true
-        }
-
-
-        return <Card
-          code={code}
-          flipHandler={flipHandler}
-          flipped={flipped}
-          id={id}
-          image={image}
-          matched={matched}
-          suit={suit} key={i}
-          value={value}
-        />
-      })
-    }
+  const renderCards = () => {
+    return cards.map(({ code, id, image, value, suit, flipped, matched }, i) => {
+      // if current card is listed in flippedCards, set it as flipped before it gets rendered
+      if (id === flippedCards[0]?.id || id === flippedCards[1]?.id) {
+        flipped = true
+      }
+      if (matchedCards.includes(code)) {
+        matched = true
+      }
 
 
-    return (
-      <div className="container">{renderCards()}</div>
-    )
+      return <Card
+        code={code}
+        flipHandler={flipHandler}
+        flipped={flipped}
+        id={id}
+        image={image}
+        matched={matched}
+        suit={suit} key={i}
+        value={value}
+      />
+    })
   }
 
-  Cards.propTypes = {
-    //start stop timer
-    cards: PropTypes.array.isRequired,
-    handler: PropTypes.func,
-  }
+
+  return (
+    <div className="container">{renderCards()}</div>
+  )
+}
+
+Cards.propTypes = {
+  //start stop timer
+  cards: PropTypes.array.isRequired,
+  handler: PropTypes.func,
+}

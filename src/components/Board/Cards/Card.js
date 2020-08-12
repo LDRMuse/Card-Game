@@ -26,7 +26,6 @@ export const Card = ({
       />
     </button>
   )
-
 }
 
 Card.propTypes = {
