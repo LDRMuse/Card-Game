@@ -14,10 +14,10 @@ export const Cards = ({ handler, cards }) => {
 
 
   useEffect(() => {
-    if (flippedCards[0]?.code === flippedCards[1]?.code) {
-      console.log('match')
+    if (flippedCards.length && flippedCards[0].code === flippedCards[1]?.code) {
+      setMatchedCards((prevMatched) => prevMatched.concat(flippedCards[0].code))
     }
-  })
+  }, [flippedCards])
 
   // if matchedCards.length = cards.length / 2, then stop the timer
 
