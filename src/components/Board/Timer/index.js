@@ -6,7 +6,7 @@ export const Timer = ({ toggle }) => {
 
 
   return (
-    <p>Timer</p>
+    <p>Timer - {toggle}</p>
   )
 
 
@@ -15,4 +15,8 @@ export const Timer = ({ toggle }) => {
 
 Timer.propTypes = {
   toggle: PropTypes.bool.isRequired,
+}
+
+Timer.defaultProps = {
+  toggle: false
 }

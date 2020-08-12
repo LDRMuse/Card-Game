@@ -7,6 +7,7 @@ import api from 'api'
 
 export const Board = () => {
   const [cards, setCards] = useState([])
+  const [toggleTimer, setToggleTimer] = useState()
 
 
   useEffect(() => {
@@ -25,10 +26,16 @@ export const Board = () => {
   },
   [])
 
+
+const handleCards = (toggle) => {
+setToggleTimer(toggle)
+}
+
+
   return (
     <main>
-    <Cards cards={cards}/>
-    <Timer />
+    <Cards cards={cards} handler={handleCards}/>
+    <Timer toggle={toggleTimer}/>
     </main>
   )
 }

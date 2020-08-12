@@ -9,7 +9,7 @@ import { Card } from './Card'
 export const Cards = ({ handler, cards }) => {
   // This will just manage flipped and matched cards
   const [flippedCards, setFlippedCards] = useState([])
-  const [matchedCards, setMatchedCards] = useState([])
+  const [matchedCards, setMatchedCards] = useState(false)
 
 
 
@@ -18,6 +18,10 @@ export const Cards = ({ handler, cards }) => {
       setMatchedCards((prevMatched) =>
       prevMatched.concat(flippedCards[0].code)
       )
+
+      if(matchedCards.length === (cards.length / 2 - 1)) {
+        handler(false)
+      }
       setFlippedCards([])
     }
     if (flippedCards.length === 2) {
@@ -27,9 +31,14 @@ export const Cards = ({ handler, cards }) => {
     }
   }, [flippedCards])
 
+
+
+
+
   // if matchedCards.length = cards.length / 2, then stop the timer
 
   const flipHandler = ({ target: { dataset } }) => {
+    handler(true)
 
     // if its TRUE that no cards are flipped
     if (!flippedCards.length) {
