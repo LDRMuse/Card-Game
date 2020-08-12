@@ -3,6 +3,8 @@ import {Cards} from './Cards'
 import {Timer} from './Timer'
 import api from 'api'
 
+
+
 export const Board = () => {
   const [cards, setCards] = useState([])
 
@@ -13,7 +15,8 @@ export const Board = () => {
 
       //duplicate cards, then add unique id
       const cardsWithIDs = cards.concat(Array.from(cards)).map((card, i) => {
-        const cardCopy = JSON.parse(JSON.stringify(card))
+        // spread ... shallow copy technique for non nested objects
+        const cardCopy = {...card}
         cardCopy.id = `${cardCopy.code}-${i}`
         return cardCopy
       })
