@@ -11,9 +11,15 @@ export const Cards = ({ handler, cards }) => {
   const [flippedCards, setFlippedCards] = useState([])
   const [matchedCards, setMatchedCards] = useState([])
 
+
+
+  useEffect(() => {
+    if (flippedCards[0]?.code === flippedCards[1]?.code) {
+      console.log('match')
+    }
+  })
+
   // if matchedCards.length = cards.length / 2, then stop the timer
-
-
 
   const flipHandler = ({ target: { dataset } }) => {
 
@@ -25,6 +31,7 @@ export const Cards = ({ handler, cards }) => {
       )
       // check to make sure same card was not clicked twice
     } else if (flippedCards[0].id !== dataset.id && flippedCards.length < 2) {
+
       setFlippedCards((flippedCards) =>
         flippedCards.concat({
           id: dataset.id,
