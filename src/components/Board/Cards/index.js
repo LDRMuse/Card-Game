@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import api from "api"
@@ -7,48 +7,34 @@ import './Cards.css'
 
 import { Card } from './Card'
 
-export const Cards = ({ handler }) => {
-  const [cards, setCards] = useState([])
+export const Cards = ({ handler, cards }) => {
+  // This will just manage flipped and matched cards
   const [flippedCards, setFlippedCards] = useState([])
 
 
 
-  useEffect(() => {
-    (async () => {
-      const { cards } = await api.index(4)
-      //duplicate cards, then add unique id
-      const cardsWithIDs = cards.concat(Array.from(cards)).map((card, i) => {
-        const cardCopy = JSON.parse(JSON.stringify(card))
-        cardCopy.id = `${cardCopy.code}-${i}`
-        return cardCopy
-      })
-      setCards(cardsWithIDs)
-    })()
-  }, [])
+  // useEffect(() => {
+  //   setCards((prevCards) =>
+  //     prevCards.map((card) => {
+  //       if (card.id === (flippedCards[0]?.id || card.id === flippedCards[1]?.id)) {
+  //         card.flipped = true
+  //       }
+  //       return card
+  //     })
+  //   )
 
 
-  useEffect(() => {
-    setCards((prevCards) =>
-      prevCards.map((card) => {
-        if (card.id === (flippedCards[0]?.id || card.id === flippedCards[1]?.id)) {
-          card.flipped = true
-        }
-        return card
-      })
-    )
+  //   if (flippedCards[0]?.code === flippedCards[1]?.code) {
+  //     cards.map((card) => {
+  //       if (card.id === (flippedCards[0]?.id || card.id === flippedCards[1]?.id)) {
+  //         card.matched = true
+  //         return card
+  //       }
 
-
-    if (flippedCards[0]?.code === flippedCards[1]?.code) {
-      cards.map((card) => {
-        if (card.id === (flippedCards[0]?.id || card.id === flippedCards[1]?.id)) {
-          card.matched = true
-          return card
-        }
-
-      })
-      // setFlippedCards([])
-    }
-  }, [flippedCards])
+  //     })
+  //     // setFlippedCards([])
+  //   }
+  // }, [flippedCards])
 
 
 
@@ -60,7 +46,7 @@ export const Cards = ({ handler }) => {
           code: dataset.code,
         })
       )
-    } else if (flippedCards[0].id != dataset.id) {
+    } else if (flippedCards[0].id !== dataset.id) {
       setFlippedCards((flippedCards) =>
         flippedCards.concat({
           id: dataset.id,
@@ -73,14 +59,14 @@ export const Cards = ({ handler }) => {
   const renderCards = () => {
     return cards.map(({ code, id, image, value, suit, flipped, matched }, i) => (
       <Card
-        flipped={flipped}
         code={code}
+        flipHandler={flipHandler}
+        flipped={flipped}
         id={id}
         image={image}
-        value={value}
-        suit={suit} key={i}
         matched={matched}
-        flipHandler={flipHandler}
+        suit={suit} key={i}
+        value={value}
       />
     ))
   }
@@ -93,5 +79,6 @@ export const Cards = ({ handler }) => {
 
 Cards.propTypes = {
   //start stop timer
+  cards: PropTypes.array.isRequired,
   handler: PropTypes.func,
 }

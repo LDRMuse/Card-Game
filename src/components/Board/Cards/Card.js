@@ -2,7 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-export const Card = ({ image, value, suit, flipped, matched, flipHandler, code, id }) => {
+export const Card = ({
+  code,
+  flipHandler,
+  flipped,
+  id,
+  image,
+  matched,
+  suit,
+  value,
+}) => {
 
 
 
@@ -21,14 +30,14 @@ export const Card = ({ image, value, suit, flipped, matched, flipHandler, code, 
 }
 
 Card.propTypes = {
-  flipped: PropTypes.bool,
-  matched: PropTypes.bool,
-  image: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  suit: PropTypes.string.isRequired,
-  flipHandler: PropTypes.func,
   code: PropTypes.string,
+  flipHandler: PropTypes.func,
+  flipped: PropTypes.bool,
   id: PropTypes.string,
+  image: PropTypes.string.isRequired,
+  matched: PropTypes.bool,
+  suit: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 }
 
 Card.defaultProps = {
