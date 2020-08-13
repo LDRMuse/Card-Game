@@ -45,7 +45,6 @@ export const Cards = ({ handler }) => {
     // filter out flipped cards
     const flippedCards = cards.filter(({ flipped }) => flipped)
     // check if any cards are currently flipped
-    console.log('hi', dataset);
 
     if (flippedCards.length < 2) {
       setCards(truthifyCards('id', 'flipped', id))
@@ -53,21 +52,35 @@ export const Cards = ({ handler }) => {
       // if codes of the currently flipped card and the dataset match
       if (flippedCards[0]?.code === code) {
         setCards(truthifyCards('code', 'matched', code))
-      }
+        setCards(
+          cards.map((card) => {
+            card.flipped = false
+            return card
+      })
+        )
+    }}
+    if (flippedCards[0]) {
+      setTimeout(() => {
+        //reset the cards
+        setCards(
+          cards.map((card) => {
+            card.flipped = false
+            return card
+          })
+        )
+      }, 2000)
     }
   }
 
 
   const truthifyCards = (key2Locate, key2Change, value2Match) => {
-    cards.map((card) => {
+    return cards.map((card) => {
       if (card[key2Locate] === value2Match) {
         card[key2Change] = true
       }
       return card
     })
   }
-
-
 
 
   const renderCards = () =>
