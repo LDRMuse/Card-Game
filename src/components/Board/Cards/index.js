@@ -40,7 +40,7 @@ export const Cards = ({ handler }) => {
     const flippedCards = cards.filter(({ flipped, matched }) => flipped && !matched)
 
     // check if any cards are currently flipped
-    if (flippedCards.length < 2) {
+    if (flippedCards.length < 2 && flippedCards[0]?.id !== id) {
       setCards(truthifyCards('id', 'flipped', id))
 
       // if codes of the currently flipped card and the dataset match
