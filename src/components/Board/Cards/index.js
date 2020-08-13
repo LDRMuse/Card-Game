@@ -30,22 +30,17 @@ export const Cards = ({ handler }) => {
   )
 
 
-
-
-
-
-
-
-  // if matchedCards.length = cards.length / 2, then stop the timer
   const flipHandler = ({ currentTarget: { dataset } }) => {
-
+    // handler(true) starts timer when first image is clicked
     handler(true)
+
     // get the code and id from dataset
     const { id, code } = dataset
+
     // filter out flipped cards
     const flippedCards = cards.filter(({ flipped }) => flipped)
-    // check if any cards are currently flipped
 
+    // check if any cards are currently flipped
     if (flippedCards.length < 2) {
       setCards(truthifyCards('id', 'flipped', id))
 
