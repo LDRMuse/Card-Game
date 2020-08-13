@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export const Card = ({
   code,
-  flipHandler,
+  handler,
   flipped,
   id,
   image,
@@ -16,7 +16,7 @@ export const Card = ({
 
 
   return (
-    <button onClick={flipHandler} data-id={id} data-code={code}>
+    <button onClick={handler} data-id={id} data-code={code}>
       <img
         src={flipped ? image : "https://source.unsplash.com/random/226x314"}
         alt={`${value} of ${suit}`}
@@ -28,7 +28,7 @@ export const Card = ({
 
 Card.propTypes = {
   code: PropTypes.string,
-  flipHandler: PropTypes.func,
+  handler: PropTypes.func,
   flipped: PropTypes.bool,
   id: PropTypes.string,
   image: PropTypes.string.isRequired,

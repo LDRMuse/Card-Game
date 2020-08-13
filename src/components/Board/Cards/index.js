@@ -31,12 +31,14 @@ export const Cards = ({ handler }) => {
 
   // if matchedCards.length = cards.length / 2, then stop the timer
   const flipHandler = ({ currentTarget: { dataset } }) => {
+
     handler(true)
     // get the code and id from dataset
     const { id, code } = dataset
     // filter out flipped cards
     const flippedCards = cards.filter(({ flipped }) => flipped)
     // check if any cards are currently flipped
+    console.log('hi', dataset);
 
     if (flippedCards.length < 2) {
       setCards(
