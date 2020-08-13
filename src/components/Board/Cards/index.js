@@ -16,7 +16,6 @@ export const Cards = ({ handler }) => {
     () => {
       ; (async () => {
         const { cards } = await api.index(4)
-
         // Duplicate the cards and then add unique id to each one (⚠️ 'references')
         const cardsWithIDs = cards.concat(Array.from(cards)).map((card, i) => {
           // We can do the 'spread' 'shallow copy' for these non-nested objects

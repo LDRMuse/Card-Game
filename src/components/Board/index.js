@@ -1,15 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Cards} from './Cards'
 import {Timer} from './Timer'
 
 
 
-
 export const Board = () => {
-  const [toggleTimer, setToggleTimer] = useState()
-
-
-
+  const [toggleTimer, setToggleTimer] = useState(false)
 
 
 const handleCards = (toggle) => {
