@@ -16,12 +16,10 @@ export const Card = ({
 
 
   return (
-    <button onClick={flipHandler}>
+    <button onClick={flipHandler} data-id={id} data-code={code}>
       <img
         src={flipped ? image : "https://source.unsplash.com/random/226x314"}
         alt={`${value} of ${suit}`}
-        data-code={code}
-        data-id={id} //dataset.id
         className={matched ? 'matched' : null}
       />
     </button>

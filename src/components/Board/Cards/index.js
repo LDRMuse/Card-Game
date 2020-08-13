@@ -1,95 +1,87 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
+import React, { useState, useEffect } from "react"
+
+import { Card } from "./Card"
+
 import api from "api"
-import './Cards.css'
-import { Card } from './Card'
 
+import "./Cards.css"
 
+export const Cards = ({ handler }) => {
+  const [cards, setCards] = useState([])
 
-export const Cards = ({ handler, cards }) => {
-  // This will just manage flipped and matched cards
-  const [flippedCards, setFlippedCards] = useState([])
-  const [matchedCards, setMatchedCards] = useState(false)
+  useEffect(
+    () => {
+      ; (async () => {
+        const { cards } = await api.index(4)
 
+        // Duplicate the cards and then add unique id to each one (⚠️ 'references')
+        const cardsWithIDs = cards.concat(Array.from(cards)).map((card, i) => {
+          // We can do the 'spread' 'shallow copy' for these non-nested objects
+          const cardCopy = { ...card }
+          cardCopy.id = `${cardCopy.code}-${i}`
+          return cardCopy
+        })
 
-
-  useEffect(() => {
-    if (flippedCards.length && flippedCards[0].code === flippedCards[1]?.code) {
-      setMatchedCards((prevMatched) =>
-      prevMatched.concat(flippedCards[0].code)
-      )
-
-      if(matchedCards.length === (cards.length / 2 - 1)) {
-        handler(false)
-      }
-      setFlippedCards([])
-    }
-    if (flippedCards.length === 2) {
-      setTimeout(() => {
-        setFlippedCards([])
-      }, 2000)
-    }
-  }, [flippedCards])
-
-
-
-
+        setCards(cardsWithIDs)
+      })()
+    },
+    []
+  )
 
   // if matchedCards.length = cards.length / 2, then stop the timer
-
-  const flipHandler = ({ target: { dataset } }) => {
+  const flipHandler = ({ currentTarget: { dataset } }) => {
     handler(true)
-
-    // if its TRUE that no cards are flipped
+    // get the code and id from dataset
+    const { id } = dataset
+    // filter out flipped cards
+    const flippedCards = cards.filter(({ flipped }) => flipped)
+    // check if any cards are currently flipped
     if (!flippedCards.length) {
-      setFlippedCards((flippedCards) =>
-        // id is for identifying EACH card, code is for comparing matching TWO cards
-        flippedCards.concat({ id: dataset.id, code: dataset.code, })
+      // if no flipped cards, find and flip the card that matches (setCards)
+      setCards(
+        cards.map((card) => {
+        if (card.id === id) {
+          card.flipped = true
+        }
+        return card
+      })
       )
-      // check to make sure same card was not clicked twice
-    } else if (flippedCards[0].id !== dataset.id && flippedCards.length < 2) {
-
-      setFlippedCards((flippedCards) =>
-        flippedCards.concat({
-          id: dataset.id,
-          code: dataset.code,
-        })
+}
+    if (flippedCards.length < 2) {
+      setCards(
+        cards.map((card) => {
+        if (card.id === id) {
+          card.flipped = true
+        }
+        return card
+      })
       )
     }
   }
 
-  const renderCards = () => {
-    return cards.map(({ code, id, image, value, suit, flipped, matched }, i) => {
-      // if current card is listed in flippedCards, set it as flipped before it gets rendered
-      if (id === flippedCards[0]?.id || id === flippedCards[1]?.id) {
-        flipped = true
-      }
-      if (matchedCards.includes(code)) {
-        matched = true
-      }
-
-
-      return <Card
-        code={code}
-        flipHandler={flipHandler}
-        flipped={flipped}
-        id={id}
-        image={image}
-        matched={matched}
-        suit={suit} key={i}
-        value={value}
-      />
+  const renderCards = () =>
+    // 'suit' and 'value' are just for alt tag
+    cards.map(({ code, flipped, matched, id, image, suit, value }, i) => {
+      return (
+        <Card
+          code={code}
+          flipped={flipped}
+          id={id}
+          image={image}
+          matched={matched}
+          suit={suit}
+          value={value}
+          handler={flipHandler}
+          key={i}
+        />
+      )
     })
-  }
 
-
-  return (
-    <div className="container">{renderCards()}</div>
-  )
+  return <div className="container">{renderCards()}</div>
 }
 
 Cards.propTypes = {
-  //start stop timer
-  cards: PropTypes.array.isRequired,
+  // Notify parent of when to start and stop the timer
   handler: PropTypes.func,
 }
