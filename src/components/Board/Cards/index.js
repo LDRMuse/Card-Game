@@ -29,6 +29,13 @@ export const Cards = ({ handler }) => {
     []
   )
 
+
+
+
+
+
+
+
   // if matchedCards.length = cards.length / 2, then stop the timer
   const flipHandler = ({ currentTarget: { dataset } }) => {
 
@@ -41,30 +48,27 @@ export const Cards = ({ handler }) => {
     console.log('hi', dataset);
 
     if (flippedCards.length < 2) {
-      setCards(
-        cards.map((card) => {
-          if (card.id === id) {
-            card.flipped = true
-          }
-          return card
-        })
-      )
+      setCards(truthifyCards('id', 'flipped', id))
 
       // if codes of the currently flipped card and the dataset match
       if (flippedCards[0]?.code === code) {
-        setCards(
-          //update cards and mark the correct one as matched
-          cards.map((card) => {
-            if (card.code === code) {
-              card.matched = true
-            }
-            return card
-          })
-        )
+        setCards(truthifyCards('code', 'matched', code))
       }
-
     }
   }
+
+
+  const truthifyCards = (key2Locate, key2Change, value2Match) => {
+    cards.map((card) => {
+      if (card[key2Locate] === value2Match) {
+        card[key2Change] = true
+      }
+      return card
+    })
+  }
+
+
+
 
   const renderCards = () =>
     // 'suit' and 'value' are just for alt tag
