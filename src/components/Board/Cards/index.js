@@ -5,7 +5,9 @@ import { Card } from "./Card"
 
 import api from "api"
 
+import shuffle from 'lodash.shuffle'
 import "./Cards.css"
+
 
 export const Cards = ({ handler }) => {
   const [cards, setCards] = useState([])
@@ -23,7 +25,8 @@ export const Cards = ({ handler }) => {
           return cardCopy
         })
 
-        setCards(cardsWithIDs)
+
+        setCards(shuffle(cardsWithIDs))
       })()
     },
     []
@@ -32,13 +35,15 @@ export const Cards = ({ handler }) => {
 
   const flipHandler = ({ currentTarget: { dataset } }) => {
     // handler(true) starts timer when first image is clicked
+
+    const flippedCards = cards.filter(({ flipped, matched }) => flipped && !matched)
+
+
     handler(true)
 
     // get the code and id from dataset
     const { id, code } = dataset
 
-    // filter out flipped cards
-    const flippedCards = cards.filter(({ flipped }) => flipped)
 
     // check if any cards are currently flipped
     if (flippedCards.length < 2) {
@@ -51,13 +56,14 @@ export const Cards = ({ handler }) => {
           cards.map((card) => {
             card.flipped = false
             return card
-      })
+          })
         )
-    if (!cards.find(({matched}) => !matched))
-    handler(false)
+        if (!cards.find(({ matched }) => !matched))
+          handler(false)
 
-    }}
-    if (flippedCards[0]) {
+      }
+    }
+    else if (flippedCards[0]) {
       setTimeout(() => {
         //reset the cards
         setCards(
