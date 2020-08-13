@@ -24,8 +24,6 @@ export const Cards = ({ handler }) => {
           cardCopy.id = `${cardCopy.code}-${i}`
           return cardCopy
         })
-
-
         setCards(shuffle(cardsWithIDs))
       })()
     },
@@ -35,15 +33,11 @@ export const Cards = ({ handler }) => {
 
   const flipHandler = ({ currentTarget: { dataset } }) => {
     // handler(true) starts timer when first image is clicked
-
-    const flippedCards = cards.filter(({ flipped, matched }) => flipped && !matched)
-
-
     handler(true)
 
     // get the code and id from dataset
     const { id, code } = dataset
-
+    const flippedCards = cards.filter(({ flipped, matched }) => flipped && !matched)
 
     // check if any cards are currently flipped
     if (flippedCards.length < 2) {
@@ -52,27 +46,19 @@ export const Cards = ({ handler }) => {
       // if codes of the currently flipped card and the dataset match
       if (flippedCards[0]?.code === code) {
         setCards(truthifyCards('code', 'matched', code))
-        setCards(
-          cards.map((card) => {
-            card.flipped = false
-            return card
-          })
-        )
         if (!cards.find(({ matched }) => !matched))
           handler(false)
-
+      } else if (flippedCards[0]) {
+        setTimeout(() => {
+          //reset the cards
+          setCards(
+            cards.map((card) => {
+              card.flipped = false
+              return card
+            })
+          )
+        }, 1000)
       }
-    }
-    else if (flippedCards[0]) {
-      setTimeout(() => {
-        //reset the cards
-        setCards(
-          cards.map((card) => {
-            card.flipped = false
-            return card
-          })
-        )
-      }, 2000)
     }
   }
 
