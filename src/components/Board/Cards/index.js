@@ -58,6 +58,9 @@ export const Cards = ({ handler }) => {
             return card
       })
         )
+    if (!cards.find(({matched}) => !matched))
+    handler(false)
+
     }}
     if (flippedCards[0]) {
       setTimeout(() => {
