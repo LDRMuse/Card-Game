@@ -9,13 +9,13 @@ import shuffle from 'lodash.shuffle'
 import "./Cards.css"
 
 
-export const Cards = ({ handler }) => {
+export const Cards = ({ handler, cardPairs }) => {
   const [cards, setCards] = useState([])
 
   useEffect(
     () => {
       ; (async () => {
-        const { cards } = await api.index(16)
+        const { cards } = await api.index(cardPairs)
         // Duplicate the cards and then add unique id to each one (⚠️ 'references')
         const cardsWithIDs = cards.concat(Array.from(cards)).map((card, i) => {
           // We can do the 'spread' 'shallow copy' for these non-nested objects
@@ -26,7 +26,7 @@ export const Cards = ({ handler }) => {
         setCards(shuffle(cardsWithIDs))
       })()
     },
-    []
+    [cardPairs]
   )
 
 
@@ -95,4 +95,5 @@ export const Cards = ({ handler }) => {
 Cards.propTypes = {
   // Notify parent of when to start and stop the timer
   handler: PropTypes.func,
+  cardPairs: PropTypes.number
 }
