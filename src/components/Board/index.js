@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Cards } from './Cards'
 import { Timer } from './Timer'
+import { Pairs } from './Pairs'
 
 
 
@@ -18,6 +19,7 @@ export const Board = () => {
     <main>
       <Cards handler={handleCards} />
       <Timer toggle={toggleTimer} />
+      <Pairs />
     </main>
   )
 }
