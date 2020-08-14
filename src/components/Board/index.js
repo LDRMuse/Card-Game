@@ -7,36 +7,34 @@ import api from 'api'
 
 
 export const Board = () => {
-  const [toggleTimer, setToggleTimer] = useState(false)
-  const [cardPairs, setCardPairs] = useState([])
-
-
-  // create new state to add up to 4 pairs of cards
-
-// use useEffect to grab 16 cards, or 4 pairs of cards and set that to the cardPairs state
-
-useEffect(() => {
-  (async () => {
-    const decks = await api.index(16)
-    setCardPairs(decks)
-  })()
-
-}, [cardPairs])
-
-
+  const [toggleTimer, setToggleTimer] = useState(false) // set timer to off before game starts
+  const [cardPair, setCardPair] = useState(0)   // create new state to add up to 4 pairs of cards
   // const [gameOver, setGameOver] = useState('')
-  // Add another component in the 'parent'('board' / 'concentration') such that we can specify how many card pairs we want.Then,
-  //   fetch
-  // appropriate number of cards.
-
-  //   It’s the same FETCH for the cards.‘Concentration’ game, but now user gets to pick how many cards they want.
-  //     So, u just need to get that info on a ‘form submission’ and parent will pass that down to ‘cards.’ Currently, we ✍️ 4 cards.We need to draw however many user asks for.
 
 
+  // use useEffect to grab 16 cards, or 4 pairs of cards and set that to the cardPairs state
+  // useEffect(() => {
+  //   (async () => {
+  //     const decks = await api.index(16)
+  //     setCardPairs(decks)
+  //   })()
+
+  // }, [cardPairs])
 
 
+  //TODO :
+  // need to figure out how to pass the amount of cards down to the cards component and then load # of pairs/cards once user chooses how many they want.
+  // like how to use this to display the amount of pairs the user wants to play with
+  const handleSelect = (event) => {
+
+    // how to grab the value of options on the event of selecting
+    // how to set the option to cardPair state
+    const cardOption = event.target.value
+
+    console.log(cardOption)
 
 
+  }
 
 
 
@@ -49,7 +47,7 @@ useEffect(() => {
     // create a drop down form to let user choose ho many pairs they want to play with
     <Fragment>
       <p>How many pairs would you like to play with?</p>
-      <form type="submit">
+      <form onSelect={handleSelect()}>
         <label htmlFor="cards">Choose a pair amount:</label>
         <select name="cards">
           <option value="1">1</option>
@@ -57,11 +55,11 @@ useEffect(() => {
           <option value="3">3</option>
           <option value="4">4</option>
         </select>
-        <input type="submit" value="Submit"/>
-        </form>
+        <input type="submit" value="Submit" />
+      </form>
 
-        <Cards handler={handleCards} />
-        <Timer toggle={toggleTimer} />
+      <Cards handler={handleCards} />
+      <Timer toggle={toggleTimer} />
 
     </Fragment>
   )
