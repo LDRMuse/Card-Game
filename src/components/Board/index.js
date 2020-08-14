@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { Cards } from './Cards'
 import { Timer } from './Timer'
 import api from 'api'
@@ -17,7 +17,7 @@ export const Board = () => {
 
 useEffect(() => {
   (async () => {
-    decks = await api.index(16)
+    const decks = await api.index(16)
     setCardPairs(decks)
   })()
 
