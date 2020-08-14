@@ -30,12 +30,12 @@ export const Cards = ({ handler }) => {
   )
 
 
-  const flipHandler = ({ currentTarget: { dataset: {id, code} } }) => {
-    // handler(true) starts timer when first image is clicked
-    handler(true)
-
+  const flipHandler = ({ currentTarget: { dataset: { id, code } } }) => {
 
     const flippedCards = cards.filter(({ flipped, matched }) => flipped && !matched)
+
+    // handler(true) starts timer when first image is clicked
+    handler(true)
 
     // check if any cards are currently flipped
     if (flippedCards.length < 2 && flippedCards[0]?.id !== id) {

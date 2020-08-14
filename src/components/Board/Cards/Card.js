@@ -14,7 +14,6 @@ export const Card = ({
 }) => {
 
 
-
   return (
     <button onClick={handler} data-id={id} data-code={code}>
       <img
