@@ -1,9 +1,23 @@
 import React from 'react';
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+
+
 import './App.css';
-import {Board} from './components'
+import { Board, Welcome } from './components'
 
 export const App = () => {
   return (
-    <Board />
+    <Router>
+    <Route exact={true} path="/">
+      <Welcome/>
+        <Link to="/game">Start Game!</Link>
+      </Route>
+        <Switch>
+          <Route path="/game">
+      <Board />
+        </Route>
+          </Switch>
+    </Router>
   );
 }
