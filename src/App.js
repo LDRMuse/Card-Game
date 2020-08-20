@@ -4,20 +4,28 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
 
 import './App.css';
-import { Board, Welcome } from './components'
+import { Board, Welcome, GameRules, HighScores } from './components'
 
 export const App = () => {
   return (
     <Router>
-    <Route exact={true} path="/">
-      <Welcome/>
+      <Route exact={true} path="/">
+        <Welcome />
         <Link to="/game">Start Game!</Link>
+        <Link to="/how-to-play">How to Play!</Link>
+        <Link to="/high-scores">High Scores!</Link>
       </Route>
-        <Switch>
-          <Route path="/game">
-      <Board />
+      <Switch>
+        <Route path="/game">
+          <Board />
         </Route>
-          </Switch>
+        <Route path="/how-to-play">
+          <GameRules />
+        </Route>
+        <Route path="/high-scores">
+          <HighScores/>
+        </Route>
+      </Switch>
     </Router>
   );
 }

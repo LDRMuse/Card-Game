@@ -1,14 +1,23 @@
-import React from 'react'
-
-
-
+import React, { Fragment } from 'react'
+import {useHistory} from "react-router-dom"
 
 
 
 
 
 export const Welcome = () => {
+const history = useHistory()
+
+
+
+const handleClick = () => {
+  history.push("/how-to-play")
+}
+
   return (
-    <h1>Welcome</h1>
+   <Fragment>
+      <h1>Welcome to Card Matching Game!</h1>
+      <button onClick={handleClick}>How to Play</button>
+   </Fragment>
   )
 }
