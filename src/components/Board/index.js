@@ -4,7 +4,7 @@ import { Timer } from './Timer'
 
 export const Board = () => {
   const [toggleTimer, setToggleTimer] = useState(false) // set timer to off before game starts
-  const [cardPairs, setCardPairs] = useState(0)   // create new state to add up to 4 pairs of cards
+  const [cardPairs, setCardPairs] = useState(0)   // create new state to add up to 12 pairs of cards
   const [gameOver, setGameOver] = useState(false)
 
 
