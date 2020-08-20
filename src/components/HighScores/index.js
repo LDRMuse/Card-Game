@@ -5,12 +5,12 @@ const [scores] = useState([
   {
     initials: 'MH',
     time: '1:11',
-    numOfCards: 24
+    numOfCards: 24,
   }
 ])
 
 
-const renderTableRows = () => {
+const renderTableRows = () =>
   scores.map(({initials, time, numOfCards}, i) => {
     return (
       <tr key={i}>
@@ -20,7 +20,7 @@ const renderTableRows = () => {
       </tr>
     )
   })
-}
+
 
 
 
