@@ -19,12 +19,18 @@ useEffect(() => {
   }
 })
 
+// Make a function to pass the time somewhere else instead of highscores?
+const passTime = () => {
+
+  // when timer stops, ass that time somewhere
+}
+
+
   return (
     <Fragment>
     <p>{time}</p>
     <HighScores time={time}/>
     </Fragment>
-    //TODO: Pass time state to table,
   )
 
 

@@ -2,24 +2,24 @@ import React, { useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 export const HighScores = ({ time, initials }) => {
-  // const [scores] = useState([
-  //   {
-  //     initials: 'MH',
-  //   }
-  // ])
+  const [scores] = useState([
+    {
+      initials: '',
+    }
+  ])
 
 
-  // const renderTableRows = () =>
-  //   scores.map(({ initials }, i) => {
-  //     return (
-  //       <tr key={i}>
-  //         <td>{initials}</td>
-  //       </tr>
-  //     )
-  //   })
+  const renderTableRows = () =>
+    scores.map(({ initials }, i) => {
+      return (
+        <tr key={i}>
+          <td>{initials}</td>
+        </tr>
+      )
+    })
 
 
-
+//TODO: figure out how to pass the correct state to highscores or create highscores own state
 
 
   return (

@@ -4,9 +4,7 @@ import { HighScores } from 'components/HighScores'
 export const GameOver = () => {
   const [initials, setInitials] = useState('')
 
-
-
-
+//TODO: figure out how to place initals in table while saving the time in the table
 
   return (
     <Fragment>
@@ -15,11 +13,7 @@ export const GameOver = () => {
       <input type="text" id="initial" name="fname"></input><br />
       <button>Enter</button>
     </form>
-
-
       <HighScores initials={initials} />
-
-
 </Fragment>
   )
 
