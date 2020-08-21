@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import { Cards } from './Cards'
 import { Timer } from './Timer'
+import { GameOver } from './GameOver'
 
 export const Board = () => {
   const [toggleTimer, setToggleTimer] = useState(false) // set timer to off before game starts
@@ -33,7 +34,7 @@ export const Board = () => {
         <option value="8">8</option>
         <option value="12">12</option>
       </select>
-      {gameOver && <p>GAME OVER</p>}
+      {gameOver && <GameOver/>}
       <Cards cardPairs={cardPairs} handler={handleCards} />
       <Timer toggle={toggleTimer} />
     </Fragment>

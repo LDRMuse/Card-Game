@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
 
 import './App.css';
-import { Board, Welcome, GameRules, HighScores, GameOver } from './components'
+import { Board, Welcome, GameRules, HighScores } from './components'
 
 export const App = () => {
   return (
@@ -25,9 +25,6 @@ export const App = () => {
         </Route>
         <Route path="/high-scores">
           <HighScores/>
-        </Route>
-        <Route path="/game-over">
-        <GameOver />
         </Route>
       </Switch>
     </Router>
