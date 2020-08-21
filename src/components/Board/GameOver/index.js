@@ -4,6 +4,8 @@ export const GameOver = () => {
 
 
 
+
+
   return (
     <form>
     <label htmlFor="initial">Enter your Initials</label><br/>

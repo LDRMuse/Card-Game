@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import PropTypes from 'prop-types'
+import { HighScores } from 'components/HighScores'
 
 export const Timer = ({ toggle }) => {
   const [time, setTime] = useState(0)
@@ -19,7 +20,11 @@ useEffect(() => {
 })
 
   return (
+    <Fragment>
     <p>{time}</p>
+    <HighScores time={time}/>
+    </Fragment>
+    //TODO: Pass time state to table,
   )
 
 
