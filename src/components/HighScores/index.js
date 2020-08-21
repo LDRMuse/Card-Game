@@ -1,22 +1,22 @@
 import React, { useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-export const HighScores = ({ time }) => {
-  const [scores] = useState([
-    {
-      initials: 'MH',
-    }
-  ])
+export const HighScores = ({ time, initials }) => {
+  // const [scores] = useState([
+  //   {
+  //     initials: 'MH',
+  //   }
+  // ])
 
 
-  const renderTableRows = () =>
-    scores.map(({ initials }, i) => {
-      return (
-        <tr key={i}>
-          <td>{initials}</td>
-        </tr>
-      )
-    })
+  // const renderTableRows = () =>
+  //   scores.map(({ initials }, i) => {
+  //     return (
+  //       <tr key={i}>
+  //         <td>{initials}</td>
+  //       </tr>
+  //     )
+  //   })
 
 
 
@@ -31,7 +31,7 @@ export const HighScores = ({ time }) => {
           <th>Time</th>
         </tr>
         <tr>
-          <td>{renderTableRows()}</td>
+          <td>{initials}</td>
           <td>{time}</td>
         </tr>
       </table>
@@ -43,5 +43,6 @@ export const HighScores = ({ time }) => {
 
 
 HighScores.propTypes = {
-  time: PropTypes.number
+  time: PropTypes.number,
+  initials: PropTypes.string,
 }
